@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #ffe0ec, #ffffff);
+      background: linear-gradient(135deg, #ffe0ec, #fff9f9);
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       color: #444;
@@ -28,14 +28,16 @@
       max-width: 600px;
       margin: 20px auto;
       min-height: 100px;
+      white-space: pre-wrap;
     }
 
     .buttons {
       margin-top: 30px;
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
       gap: 16px;
+      z-index: 1;
+      position: relative;
     }
 
     button {
@@ -51,12 +53,17 @@
     #yesBtn {
       background-color: #ff6f91;
       color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     #noBtn {
       background-color: #bdbdbd;
       color: white;
       position: absolute;
+      left: 50%;
+      top: 75%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
     }
 
     audio {
@@ -75,37 +82,52 @@
         padding: 10px 20px;
         min-width: 100px;
       }
+      #noBtn {
+        top: 85%;
+      }
     }
   </style>
 </head>
 <body>
+<iframe
+  id="bgm"
+  width="0"
+  height="0"
+  src="https://www.youtube.com/embed/-09m9bsxfsw?autoplay=1&loop=1&playlist=-09m9bsxfsw&controls=0"
+  frameborder="0"
+  allow="autoplay"
+></iframe>
+
   <h1>Hi Sonya ❤️</h1>
   <div id="typedText"></div>
 
-    <div class="buttons">
-      <button id="yesBtn" onclick="yes()">Yes, I want 💖</button>
-    </div>
-    <button id="noBtn" onmouseover="moveButton()">No 😅</button>
-
-
-  <audio autoplay loop>
-  <source src="https://cdn.pixabay.com/audio/2023/03/26/audio_dfbecd24c6.mp3" type="audio/mpeg">
-    </audio>
-
+  <div class="buttons">
+    <button id="yesBtn" onclick="yes()">Yes, I want 💖</button>
+  </div>
+  <button id="noBtn" onmouseover="moveButton()">No 😅</button>
 
   <script>
-    const text = `I've been coding this page just for you... 🧑‍💻💌
-Karena dari semua baris kode yang aku tulis, cuma satu yang paling penting...
+    const text = `Hey Sonya... 🌸
 
-if (kamu == pacarku) {
-   aku.bahagia();
-}
+    Aku udah coding halaman ini cuma buat kamu...
 
-So, Sonya...
-Maukah kamu jadi pacarku? 😳💗`;
+    Karena kamu beda.
+
+    Karena kamu selalu ada di pikiranku. 💭
+
+    Aku cuma mau bilang...
+
+    Kalau dari semua baris kode yang pernah aku tulis,
+    cuma satu yang paling penting:
+
+    if (kamu == pacarku) {
+        aku.bahagia();
+    }
+
+    Jadi... maukah kamu jadi pacarku? 😳❤️`;
 
     let i = 0;
-    const speed = 50;
+    const speed = 40;
     function typeWriter() {
       if (i < text.length) {
         document.getElementById("typedText").innerHTML += text.charAt(i);
@@ -124,8 +146,19 @@ Maukah kamu jadi pacarku? 😳💗`;
     }
 
     function yes() {
-      document.body.innerHTML = "<h1>YAY!! 😍❤️<br>Sonya is now my girlfriend!</h1><p style='font-size:20px;'>Aku janji bakal selalu bikin kamu senyum 😚</p>";
+      document.body.innerHTML = "<h1>YAY!! 😍❤️<br>Sonya is now my girlfriend!</h1><p style='font-size:20px;'>Aku janji bakal selalu bikin kamu senyum terus 😚</p>";
     }
+
+    // Autoplay on load
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('bgm');
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          document.body.addEventListener('click', () => audio.play(), { once: true });
+        });
+      }
+    });
   </script>
 </body>
 </html>
