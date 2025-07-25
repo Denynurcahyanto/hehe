@@ -89,14 +89,11 @@
   </style>
 </head>
 <body>
-<iframe
-  id="bgm"
-  width="0"
-  height="0"
-  src="https://www.youtube.com/embed/-09m9bsxfsw?autoplay=1&loop=1&playlist=-09m9bsxfsw&controls=0"
-  frameborder="0"
-  allow="autoplay"
-></iframe>
+  <!-- GANTI src DENGAN NAMA FILE MP3 KAMU -->
+  <audio id="bgm" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg" />
+    Browser kamu tidak mendukung audio.
+  </audio>
 
   <h1>Hi Sonya ❤️</h1>
   <div id="typedText"></div>
@@ -149,7 +146,7 @@
       document.body.innerHTML = "<h1>YAY!! 😍❤️<br>Sonya is now my girlfriend!</h1><p style='font-size:20px;'>Aku janji bakal selalu bikin kamu senyum terus 😚</p>";
     }
 
-    // Autoplay on load
+    // Autoplay fix jika diblokir browser
     window.addEventListener('load', () => {
       const audio = document.getElementById('bgm');
       const playPromise = audio.play();
